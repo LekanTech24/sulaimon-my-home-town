@@ -1,6 +1,64 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+  
+           
+    
+            
+    
+            .carousel {
+                display: flex;
+                align-items: center;
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+                justify-content: center;
+            }
+    
+            #carousel-image {
+                width: 400px;
+                height: 250px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                object-fit: cover;
+                transition: opacity 0.4s ease-in-out;
+            }
+    
+            .carousel button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-size: 18px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                margin: 0 10px;
+            }
+    
+            .carousel button:hover {
+                background-color: #0056b3;
+            }
+    
+            .carousel button i {
+                font-style: normal;
+                font-weight: bold;
+            }
+    
+            @media (max-width: 768px) {
+                #carousel-image {
+                    width: 300px;
+                    height: 200px;
+                }
+    
+                .carousel button {
+                    padding: 8px 15px;
+                    font-size: 16px;
+                }
+            }
+        </style>
         <title>Lagos My home town </title>
         <link rel="stylesheet" href="styles.css">
     </head>
@@ -37,6 +95,11 @@
             </div>
         </div>
 
+        <div class="carousel">
+            <button id="prev-btn"><i>&lt;</i> Previous</button>
+            <img id="carousel-image" src="" alt="Carousel Image" />
+            <button id="next-btn">Next <i>&gt;</i></button>
+        </div>
         <!-- GUIDE SECTION -->
         <div id="container-2">
             <img alt="My picture" src="images/self-pic.jpg" class="self-pic">
@@ -47,4 +110,34 @@
             </div>
         </div>
     </body>
+    <script>
+        const images = [
+            "https://sulaimon-my-home-town.netlify.app/images/Chiang%20Kai-shek%20Memorial%20Hall.jpg",
+            "https://sulaimon-my-home-town.netlify.app/images/Nightmarket.jpg",
+            "https://sulaimon-my-home-town.netlify.app/images/Jiufen%20Old%20Street.jpg"
+        ];
+
+        let currentIndex = 0;
+
+        function displayImage() {
+            const imgElement = document.getElementById("carousel-image");
+            imgElement.style.opacity = 0; 
+            setTimeout(() => {
+                imgElement.src = images[currentIndex];
+                imgElement.style.opacity = 1; 
+            }, 200);
+        }
+
+        window.onload = displayImage;
+
+        document.getElementById("next-btn").addEventListener("click", function () {
+            currentIndex = (currentIndex + 1) % images.length;
+            displayImage();
+        });
+
+        document.getElementById("prev-btn").addEventListener("click", function () {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            displayImage();
+        });
+    </script>
 </html>
